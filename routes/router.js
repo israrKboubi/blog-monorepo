@@ -4,6 +4,6 @@ const articleDelete = require("./delete-article");
 const articleUpdate = require("./update-article");
 
 routes.use("/", articles);
-routes.use("/", articleDelete);
-routes.use("/", articleUpdate);
+//routes.use("/", articleDelete);
+//routes.use("/", articleUpdate);
 module.exports = routes;

@@ -1,5 +1,5 @@
 const app = require("../app");
-const route = require("../routes/delete-article");
+const route = require("../routes/update-article");
 
 app.use("/api/", route);
 
