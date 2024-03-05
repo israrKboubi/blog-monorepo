@@ -4,6 +4,10 @@ var db = require('../app/db').db;
 const articles = require("express").Router();
 
 articles.get('/articles', (req, res) => {
+  if(req.query.id)
+  {
+    getArticleById(req.query.id)
+  }else{
   db.getConnection(function (err, connection) {
     connection.query(`SELECT * FROM articles ORDER BY date DESC;`, (err, rows) => {
       if (err) {
@@ -36,8 +40,25 @@ articles.get('/articles', (req, res) => {
     });
     connection.release();
   });
+  }
 });
 
+function getArticleById(id){
+  db.getConnection(function (err, connection) {
+    connection.query(`SELECT * FROM articles WHERE id = ?`, [id], (err, row) => {
+      if (err) {
+        connection.release();
+        console.error(err.message);
+        res.status(500).send("Internal Server Error");
+      } else if (row) {
+        res.send(row[0]);
+      } else {
+        res.status(404).send("Article not found");
+      }
+    });
+    connection.release();
+  });
+}
 
 var utils = require('../app/utils');
 const imgbox = require('imgbox-js');
