@@ -1,7 +1,7 @@
 const articleDelete = require("express").Router();
 var db = require('../app/db').db;
 
-articleDelete.delete('/articles/:id', (req, res) => {
+articleDelete.delete('/articles/delete/:id', (req, res) => {
     const { id } = req.params;
     db.getConnection(function (err, connection) {
       connection.query(`DELETE FROM articles WHERE id = ?`, [id], function (err, result) {

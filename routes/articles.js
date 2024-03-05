@@ -53,7 +53,7 @@ articles.get('/articles', (req, res) => {
       }
     });
     connection.release();
-  });
+    });
   });
 
   module.exports = articles;
