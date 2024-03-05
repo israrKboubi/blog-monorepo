@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon devServer.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "imgbox-js": "^1.0.35",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.9.10"
+    "nodemailer": "^6.9.10",
+    "nodemon": "^3.1.0"
   }
 }

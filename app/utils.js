@@ -1,9 +1,8 @@
 
-const config = require('./config');
-const multer = config.multer;
-const path = config.path;
-const fs = config.fs;
-var crypto = config.crypto;
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 
 
 //function validation for admin
