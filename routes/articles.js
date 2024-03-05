@@ -60,7 +60,7 @@ var utils = require('../app/utils');
 const imgbox = require('imgbox-js');
 const crypto = require('crypto');
 
-articles.post('/articlesAdd', utils.upload.single('banner'), (req, res) => {
+articles.post('/articles', utils.upload.single('banner'), (req, res) => {
   const { title, content } = req.body;
   const banner = req.file ? req.file.filename : null;
   const sweetId = crypto.randomBytes(3).toString('hex') + "-" + title.replace(/ /g, '-');
