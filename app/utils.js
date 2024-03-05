@@ -15,7 +15,7 @@ function generateRandomString() {
 //upload files manager
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '/../tmp/');
+    const uploadPath = '/../tmp/';
     //if (!fs.existsSync(uploadPath)) {
       //fs.mkdirSync(uploadPath);
     //}
