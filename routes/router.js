@@ -3,5 +3,6 @@ const articles = require("./articles");
 const auth = require("./auth");
 
 routes.use("/", articles);
-routes.use("/", auth);
+routes.use("/auth", auth);
+console.log(routes)
 module.exports = routes;
