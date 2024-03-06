@@ -7,9 +7,9 @@ routes.get("/", async function (req, res) {
               <br>
               <a href='/books'>Books</a>`);
   });
-  
-routes.use("/", articles);
-routes.use("/auth", auth);
+
+//routes.use("/", articles);
+routes.use("/", auth);
 
 console.log(routes)
 module.exports = routes;
