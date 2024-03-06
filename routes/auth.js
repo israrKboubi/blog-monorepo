@@ -10,8 +10,9 @@ auth.get('/auth', (req, res) => {
   const randomString = utils.generateRandomString();
   adminToken = randomString;
   tokenTimestamp = Date.now();
-  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken);
-  res.json({ message: 'Random string generated and sent to admin email.' });
+  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken).then(()=>{
+    res.json({ message: 'Random string generated and sent to admin email.' });
+  })
 });
 
 async function sendEmail(toEmail, subject, message) {
@@ -33,18 +34,18 @@ async function sendEmail(toEmail, subject, message) {
     text: message
   };
   await new Promise((resolve, reject) => {
-   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-    } else {
-      console.log('Email sent:', info.response);
-    }
-  });
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                reject('Error sending email:', error);
+            } else {
+                resolve('Email sent:', info.response);
+            }
+        });
     });
 }
 
 
-auth.post('/auth/verify', (req, res) => {
+auth.post('/auth', (req, res) => {
   const { token } = req.body.password;
   if (adminToken && isTokenValid() && req.body.password === adminToken) {
     res.json({ verified: true });
@@ -62,7 +63,7 @@ function isTokenValid() {
   return false;
 }
 
-auth.get('/auth/signout', (req, res) => {
+auth.delete('/auth', (req, res) => {
   killtoken();
   res.json({ signout: true });
 });
