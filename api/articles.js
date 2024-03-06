@@ -4,6 +4,6 @@ const route2 = require("../routes/auth");
 
 
 app.use("/api/", route);
-app.use("/auth/", route2);
+app.use("/api/", route2);
 
 module.exports = app;

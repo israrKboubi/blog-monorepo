@@ -1,6 +1,6 @@
 const routes = require("express").Router();
 const articles = require("./articles");
-const auth = require("./auth");
+//const auth = require("./auth");
 
 
 routes.use("/", articles);
