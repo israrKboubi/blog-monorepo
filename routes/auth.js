@@ -17,6 +17,9 @@ auth.get('/auth', (req, res) => {
 function sendEmail(toEmail, subject, message) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, 
     auth: {
       user: 'kouiisrar@gmail.com',
       pass: process.env.EMAILPASS || 'wnzh wmnp ulif vguj'
