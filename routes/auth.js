@@ -10,11 +10,11 @@ auth.get('/auth', (req, res) => {
   const randomString = utils.generateRandomString();
   adminToken = randomString;
   tokenTimestamp = Date.now();
-  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken);
-  res.json({ message: 'Random string generated and sent to admin email.' });
+  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken).then(()=>res.json({ message: 'Random string generated and sent to admin email.' }))
+  
 });
 
-function sendEmail(toEmail, subject, message) {
+async function sendEmail(toEmail, subject, message) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: "smtp.gmail.com",
@@ -32,14 +32,15 @@ function sendEmail(toEmail, subject, message) {
     subject: subject,
     text: message
   };
-
-  transporter.sendMail(mailOptions, (error, info) => {
+  await new Promise((resolve, reject) => {
+   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error('Error sending email:', error);
     } else {
       console.log('Email sent:', info.response);
     }
   });
+    });
 }
 
 
