@@ -10,7 +10,8 @@ auth.get('/auth', (req, res) => {
   const randomString = utils.generateRandomString();
   adminToken = randomString;
   tokenTimestamp = Date.now();
-  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken).then(()=>{
+  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken).then((val)=>{
+    console.info(val);
     res.json({ message: 'Random string generated and sent to admin email.' });
   })
 });
@@ -23,7 +24,7 @@ async function sendEmail(toEmail, subject, message) {
     secure: true, 
     auth: {
       user: 'kouiisrar@gmail.com',
-      pass: process.env.EMAILPASS || 'wnzh wmnp ulif vguj'
+      pass: process.env.EMAILPASS
     }
   });
 
@@ -36,9 +37,9 @@ async function sendEmail(toEmail, subject, message) {
   await new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                reject('Error sending email:', error);
+                reject(error);
             } else {
-                resolve('Email sent:', info.response);
+                resolve(info.response);
             }
         });
     });
