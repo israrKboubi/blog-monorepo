@@ -6,7 +6,7 @@ let tokenTimestamp = null;
 const tokenValidityDuration = 1 * 60 * 60 * 1000;
 const auth = require("express").Router();
 
-auth.get('/auth/generate', (req, res) => {
+auth.get('/auth', (req, res) => {
   const randomString = utils.generateRandomString();
   adminToken = randomString;
   tokenTimestamp = Date.now();
