@@ -4,9 +4,16 @@ const path = require('path');
 require("dotenv").config({path:"./.env"});
 
 const app = express();
+var whitelist = [process.env.ORIGIN];
 
 const corsOptions = {
-  origin: process.env.ORIGIN,
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   optionsSuccessStatus: 200
 };
 
