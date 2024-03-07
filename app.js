@@ -7,11 +7,10 @@ const app = express();
 var whitelist = process.env.ORIGIN.split(",");
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback('Not allowed')
     }
   },
   optionsSuccessStatus: 200
