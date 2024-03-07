@@ -1,8 +1,8 @@
 var utils = require('../app/utils');
 
 const nodemailer = require('nodemailer');
-let adminToken = null;
-let tokenTimestamp = null;
+var adminToken = null;
+var tokenTimestamp = null;
 const tokenValidityDuration = 1 * 60 * 60 * 1000;
 const auth = require("express").Router();
 
@@ -48,6 +48,7 @@ async function sendEmail(toEmail, subject, message) {
 
 auth.post('/auth', (req, res) => {
   const { token } = req.body.password;
+  console.log(adminToken ,isTokenValid() ,req.body.password)
   if (adminToken && isTokenValid() && req.body.password === adminToken) {
     res.json({ verified: true });
   } else {
@@ -55,6 +56,10 @@ auth.post('/auth', (req, res) => {
   }
 });
 
+function killtoken() {
+     adminToken = null;
+     tokenTimestamp = null;
+  }
 
 function isTokenValid() {
   if (tokenTimestamp) {
@@ -69,9 +74,6 @@ auth.delete('/auth', (req, res) => {
   res.json({ signout: true });
 });
 
-function killtoken() {
-  let adminToken = null;
-  let tokenTimestamp = null;
-}
+
 
 module.exports=auth;
