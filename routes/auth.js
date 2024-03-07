@@ -10,7 +10,7 @@ auth.get('/auth', (req, res) => {
   const randomString = utils.generateRandomString();
   adminToken = randomString;
   tokenTimestamp = Date.now();
-  sendEmail('kouiisrar@gmail.com', 'Admin Token', adminToken).then((val)=>{
+  sendEmail(process.env.EMAIL, 'Admin Token', adminToken).then((val)=>{
     console.info(val);
     res.json({ message: 'Random string generated and sent to admin email.' });
   })
@@ -23,13 +23,13 @@ async function sendEmail(toEmail, subject, message) {
     port: 465,
     secure: true, 
     auth: {
-      user: 'kouiisrar@gmail.com',
+      user: process.env.EMAIL,
       pass: process.env.EMAILPASS
     }
   });
 
   const mailOptions = {
-    from: 'kouiisrar@gmail.com',
+    from: process.env.EMAIL,
     to: toEmail,
     subject: subject,
     text: message
