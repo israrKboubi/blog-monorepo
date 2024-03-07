@@ -4,10 +4,10 @@ const path = require('path');
 require("dotenv").config({path:"./.env"});
 
 const app = express();
-var whitelist = [process.env.ORIGIN];
-
+var whitelist = process.env.ORIGIN.split(",");
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
